@@ -1,19 +1,20 @@
 # kenchiku-mcp
 
-Architectural CAD MCP server for ZWCAD with non-uniform block scaling.
+ZWCAD 向け建築CAD MCP サーバー。非均一スケールによるブロック挿入に対応。
 
 ## Attribution
 
-This project is based on [multiCAD-mcp](https://github.com/AnCode666/multiCAD-mcp) v0.2.0, originally created by [AnCode666](https://github.com/AnCode666), SVF-GFA, and JardiMargalefAgusti, and licensed under the [Apache License 2.0](LICENSE).
+Based on [multiCAD-mcp](https://github.com/AnCode666/multiCAD-mcp) v0.2.0 by [AnCode666](https://github.com/AnCode666), SVF-GFA, and JardiMargalefAgusti ([Apache License 2.0](LICENSE)).
+See [NOTICE](NOTICE) for modification details.
 
-See [NOTICE](NOTICE) for details on modifications.
+## Differences from multiCAD-mcp
 
-## What's different from multiCAD-mcp
-
-| Feature              | multiCAD-mcp         | kenchiku-mcp                      |
-| -------------------- | -------------------- | --------------------------------- |
-| Block insert scaling | Uniform only (`1.5`) | Uniform + non-uniform (`2.0x1.0`) |
-| Focus                | General multi-CAD    | Architectural workflows (ZWCAD)   |
+| Feature        | multiCAD-mcp         | kenchiku-mcp                      |
+| -------------- | -------------------- | --------------------------------- |
+| Block scaling  | Uniform only (`1.5`) | Uniform + non-uniform (`2.0x1.0`) |
+| Focus          | General multi-CAD    | Architectural workflows (ZWCAD)   |
+| stdout safety  | StreamHandler(stdout) | StreamHandler(stderr)            |
+| Logging        | multicad_mcp.log     | kenchiku_mcp.log                  |
 
 ## Non-uniform scaling
 
@@ -21,9 +22,8 @@ See [NOTICE](NOTICE) for details on modifications.
 insert|WindowSash|100,0|4.213x1.0|0|window
 ```
 
-Format: `scale_x` **x** `scale_y` (e.g., `4.213x1.0` scales width 4.213x, keeps depth 1.0x).
-
-Uniform scaling still works as before: `insert|Door|10,20|1.5|90|walls`
+`scale_x` **x** `scale_y` — width 4.213x, depth 1.0x.
+Uniform scaling: `insert|Door|10,20|1.5|90|walls`
 
 ## Installation
 
@@ -35,8 +35,24 @@ python -m venv .venv
 pip install -e .
 ```
 
+## Claude Code configuration
+
+```json
+{
+  "command": "<project-path>/.venv/Scripts/python.exe",
+  "args": ["src/server.py"],
+  "cwd": "<project-path>",
+  "env": {
+    "DOTENV_CONFIG_QUIET": "true",
+    "PYTHONIOENCODING": "utf-8"
+  }
+}
+```
+
+`<project-path>` = kenchiku-mcp をクローンしたディレクトリの絶対パス。
+
+Permission: `mcp__kenchiku__*`
+
 ## License
 
-[Apache License 2.0](LICENSE)
-
-This project includes code from [multiCAD-mcp](https://github.com/AnCode666/multiCAD-mcp) (Apache-2.0).
+[Apache License 2.0](LICENSE) — includes code from [multiCAD-mcp](https://github.com/AnCode666/multiCAD-mcp).
