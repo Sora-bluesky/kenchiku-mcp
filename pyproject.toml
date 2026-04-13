@@ -54,10 +54,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ancode666/multiCAD-mcp"
-Documentation = "https://github.com/ancode666/multiCAD-mcp/blob/main/README.md"
-Repository = "https://github.com/ancode666/multiCAD-mcp.git"
-"Bug Tracker" = "https://github.com/ancode666/multiCAD-mcp/issues"
+Homepage = "https://github.com/Sora-bluesky/kenchiku-mcp"
+Documentation = "https://github.com/Sora-bluesky/kenchiku-mcp/blob/main/README.md"
+Repository = "https://github.com/Sora-bluesky/kenchiku-mcp.git"
+"Bug Tracker" = "https://github.com/Sora-bluesky/kenchiku-mcp/issues"
 
 
 [tool.mypy]

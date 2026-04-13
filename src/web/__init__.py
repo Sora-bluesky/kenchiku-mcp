@@ -1,1 +1,1 @@
-"""Web API module for multiCAD-MCP."""
+"""Web API module for kenchiku-mcp."""
