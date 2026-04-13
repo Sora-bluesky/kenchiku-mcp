@@ -1,14 +1,16 @@
 """
-multiCAD-MCP Server
+kenchiku-mcp Server
 
-Fast, extensible MCP server for controlling multiple CAD applications.
-
-Uses FastMCP framework for clean, decorator-based tool definition.
-Supports AutoCAD, ZWCAD, GstarCAD, and other COM-compatible CAD software.
+Architectural CAD MCP server for ZWCAD.
+Based on multiCAD-mcp. Uses FastMCP framework for decorator-based tool definition.
 """
 
+import os
 import sys
 import logging
+
+# Prevent third-party libraries from writing to stdout (breaks stdio transport)
+os.environ.setdefault("DOTENV_CONFIG_QUIET", "true")
 
 from fastmcp import FastMCP
 
@@ -77,7 +79,7 @@ def register_all_tools():
 register_all_tools()
 
 # CAD connection is lazy-loaded on first tool use
-logger.info(f"Starting multiCAD-MCP server v{__version__}...")
+logger.info(f"Starting kenchiku-mcp server v{__version__}...")
 logger.info(f"Supported CAD types: {', '.join(get_supported_cads())}")
 logger.info("CAD applications will be connected on first tool use (lazy loading)")
 
@@ -103,7 +105,7 @@ if __name__ == "__main__":
 
     try:
         if use_stdio:
-            logger.info("Starting multiCAD-MCP server in stdio mode...")
+            logger.info("Starting kenchiku-mcp server in stdio mode...")
 
             # Start dashboard in background
             web_thread = threading.Thread(target=run_dashboard, daemon=True)
@@ -112,7 +114,7 @@ if __name__ == "__main__":
             # Run MCP stdio
             mcp.run(transport="stdio")
         else:
-            logger.info("Starting multiCAD-MCP server in HTTP mode...")
+            logger.info("Starting kenchiku-mcp server in HTTP mode...")
 
             # Mount dashboard on the same app
             # Note: FastMCP.http_app allows mounting additional FastAPI apps
