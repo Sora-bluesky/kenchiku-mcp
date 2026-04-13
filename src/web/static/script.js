@@ -1,5 +1,5 @@
 // ========================
-// multiCAD-MCP Dashboard
+// kenchiku-mcp Dashboard
 // ========================
 
 let cadStatus = {

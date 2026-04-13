@@ -72,7 +72,7 @@ log_handler = _MemoryLogHandler(log_buffer)
 log_handler.setLevel(logging.INFO)
 
 # FastAPI App
-api_app = FastAPI(title="multiCAD-MCP Dashboard API")
+api_app = FastAPI(title="kenchiku-mcp Dashboard API")
 
 
 @api_app.post("/api/cad/export")

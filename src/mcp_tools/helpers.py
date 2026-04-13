@@ -39,14 +39,20 @@ def setup_logging() -> logging.Logger:
     config = get_config()
     log_level = getattr(logging, config.logging_level.upper(), logging.INFO)
 
-    logging.basicConfig(
-        level=log_level,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.StreamHandler(sys.stderr),
-            logging.FileHandler(log_file, encoding="utf-8"),
-        ],
-    )
+    # Explicitly configure root logger instead of basicConfig() which is
+    # a no-op if any handler already exists (e.g. from fastmcp imports).
+    root = logging.getLogger()
+    root.setLevel(log_level)
+    # Remove any pre-existing handlers (especially stdout ones from dependencies)
+    for h in root.handlers[:]:
+        root.removeHandler(h)
+    fmt = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stderr_handler.setFormatter(fmt)
+    file_handler = logging.FileHandler(log_file, encoding="utf-8")
+    file_handler.setFormatter(fmt)
+    root.addHandler(stderr_handler)
+    root.addHandler(file_handler)
 
     return logging.getLogger(__name__)
 
