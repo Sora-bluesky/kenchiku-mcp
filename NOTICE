@@ -1,0 +1,10 @@
+kenchiku-mcp
+Copyright 2026 Sora-bluesky
+
+This product is based on multiCAD-mcp (https://github.com/AnCode666/multiCAD-mcp),
+originally created by AnCode666, SVF-GFA, and JardiMargalefAgusti,
+and licensed under the Apache License, Version 2.0.
+
+Modifications from the original:
+- Non-uniform scaling support (scale_x, scale_y) for block insertion
+- Project renamed and re-scoped for architectural CAD workflows
